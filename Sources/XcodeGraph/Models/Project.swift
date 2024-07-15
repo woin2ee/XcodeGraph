@@ -55,8 +55,8 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
     /// The version in which a check happened related to recommended settings after updating Xcode.
     public var lastUpgradeCheck: Version?
 
-    /// Indicates whether the project is imported through `Package.swift`.
-    public var isExternal: Bool
+    /// A type that indicates where the project is coming from.
+    public var type: ProjectType
 
     // MARK: - Init
 
@@ -81,7 +81,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
     ///   - additionalFiles: The additional files to include in the project
     ///   - resourceSynthesizers: `ResourceSynthesizers` that will be applied on individual target's resources
     ///   - lastUpgradeCheck: The version in which a check happened related to recommended settings after updating Xcode.
-    ///   - isExternal: Indicates whether the project is imported through `Package.swift`.
+    ///   - type: A type that indicates where the project is coming from.
     public init(
         path: AbsolutePath,
         sourceRootPath: AbsolutePath,
@@ -100,7 +100,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
         additionalFiles: [FileElement],
         resourceSynthesizers: [ResourceSynthesizer],
         lastUpgradeCheck: Version?,
-        isExternal: Bool
+        type: ProjectType
     ) {
         self.path = path
         self.sourceRootPath = sourceRootPath
@@ -119,7 +119,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
         self.additionalFiles = additionalFiles
         self.resourceSynthesizers = resourceSynthesizers
         self.lastUpgradeCheck = lastUpgradeCheck
-        self.isExternal = isExternal
+        self.type = type
     }
 
     // MARK: - CustomStringConvertible
@@ -171,7 +171,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
             additionalFiles: [FileElement] = [],
             resourceSynthesizers: [ResourceSynthesizer] = [],
             lastUpgradeCheck: Version? = nil,
-            isExternal: Bool = false
+            type: ProjectType = .tuistProject
         ) -> Project {
             Project(
                 path: path,
@@ -191,7 +191,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
                 additionalFiles: additionalFiles,
                 resourceSynthesizers: resourceSynthesizers,
                 lastUpgradeCheck: lastUpgradeCheck,
-                isExternal: isExternal
+                type: type
             )
         }
 
@@ -214,7 +214,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
             additionalFiles: [FileElement] = [],
             resourceSynthesizers: [ResourceSynthesizer] = [],
             lastUpgradeCheck: Version? = nil,
-            isExternal: Bool = false
+            type: ProjectType = .tuistProject
         ) -> Project {
             Project(
                 path: path,
@@ -234,7 +234,7 @@ public struct Project: Hashable, Equatable, CustomStringConvertible, CustomDebug
                 additionalFiles: additionalFiles,
                 resourceSynthesizers: resourceSynthesizers,
                 lastUpgradeCheck: lastUpgradeCheck,
-                isExternal: isExternal
+                type: type
             )
         }
     }
